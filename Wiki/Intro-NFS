@@ -1,0 +1,28 @@
+
+Network File System (NFS)
+ 
+![](http://arunblog.in/wp-content/uploads/2014/12/Network-file-sharing.jpg)
+ 
+ **NFS**
+ 
+ Is a distributed file system protocol originally developed by Sun Microsystems in 1984, allowing a user on a client computer to access files over computer network much like local storage is accessed. It is built on the open network computing remote produce call (ONC RPC) system
+ 
+ NFS allows a system to share directories and files with others systems throughout the network. NFS allows user to access files remotely as they are local files.
+ 
+ # Advantages of NFS:
+ 
+ * Local Workstations use less space in the hard disk because it commonly used data can be store on a single machine and remain accessible to the whole network.
+ 
+ * It isn't necessary for users to have separate boot directories on each machine on the network. Boot directories can be configured on an NFS server and available through the network.
+ 
+ * Storage devices such as floppy disks, CDROM drives, and USB devices  can be used by other machines over the network. this reduces the number of removable devices in the network.
+ 
+ # Versions
+ 
+ There are 3 useful versions of NFs
+
+ **NFSv2:** this version works only over UDP and only allowed the first 2gb of a file to be read due to 32-bit limitations. TCP was added to be supported time later
+ 
+ **NFSv3:** support 64-bit file sives and files larger than 2gb, also support asynchronous writes on the server.
+
+**NFSv4:** It is the latest version of NFS. mandates strong securty and include stateful protocol. it is the first version developed with the internet engineering task force (IETF)
