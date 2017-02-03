@@ -1,4 +1,5 @@
 !#/bin/bash
+
 #configuration of NFS client in ubuntu
 #install the NFS
 apt-get -y install nfs-common
