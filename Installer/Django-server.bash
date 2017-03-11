@@ -64,3 +64,7 @@ echo "here's our new django project dir"
 tree project1
 
 echo "go to https://docs.djangoproject.com/en/1.10/intro/tutorial01/"
+#obtain external IP
+Ip=$(curl icanhazip.com)
+#set the IP into the django setting
+sed -i -e "28s/.*/ALLOWED_HOSTS = [\'$Ip\']/" /opt/django/project1/project1/settings.py
