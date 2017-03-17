@@ -18,6 +18,11 @@ rpm -iUvh https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noar
 
 yum -y install python-pip
 
+#install, enable and start apache
+yum -y install httpd
+systemctl enable httpd
+systemctl start httpd
+
 # Now we're installing virtualenv, which will allow us to create a python installation and environment, just for our Django server
 pip install virtualenv
 
