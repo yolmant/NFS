@@ -61,7 +61,7 @@ sed -i "14s/.*/\t\$conf['servers'][0]['desc'] = '$Napostgres PostgreSQL';/" /etc
 sed -i "18s/.*/\t\$conf['servers'][0]['host'] = 'localhost';/" /etc/phpPgAdmin/config.inc.php
 sed -i "31s/.*/\t\$conf['servers'][0]['defaultdb'] = 'postgres';/" /etc/phpPgAdmin/config.inc.php
 sed -i "93s/.*/\t\$conf['extra_login_security'] = false;/" /etc/phpPgAdmin/config.inc.php
-sed -i "99s/$conf['owned_only'] = true;/" /etc/phpPgAdmin/config.inc.php
+sed -i "99s/.*/\t\$conf['owned_only'] = true;/" /etc/phpPgAdmin/config.inc.php
 
 
 #allow db to connect on httpd
