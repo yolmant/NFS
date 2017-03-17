@@ -57,11 +57,11 @@ sudo yum -y install phpPgAdmin
 sudo sed -i 's,  Require local,  Require all granted,g' /etc/httpd/conf.d/phpPgAdmin.conf
 
 #modifiying config.inc.php
-sed -i "s/$conf['servers'][0]['desc'] = 'PostgreSQL';/$conf['servers'][0]['desc'] = '$Napostgres PostgreSQL';/" /etc/phpPgAdmin/config.inc.php
-sed -i "s/$conf['servers'][0]['host'] = 'localhost';/$conf['servers'][0]['host'] = 'localhost';/" /etc/phpPgAdmin/config.inc.php
-sed -i "s/$conf['servers'][0]['defaultdb'] = 'template1';/$conf['servers'][0]['defaultdb'] = 'postgres';/" /etc/phpPgAdmin/config.inc.php
-sed -i "s/$conf['extra_login_security'] = true;/$conf['extra_login_security'] = false;/" /etc/phpPgAdmin/config.inc.php
-sed -i "s/$conf['owned_only'] = false;/$conf['owned_only'] = true;/" /etc/phpPgAdmin/config.inc.php
+sed -i "14s/.*/\t\$conf['servers'][0]['desc'] = '$Napostgres PostgreSQL';/" /etc/phpPgAdmin/config.inc.php
+sed -i "18s/.*/\t\$conf['servers'][0]['host'] = 'localhost';/" /etc/phpPgAdmin/config.inc.php
+sed -i "31s/.*/\t\$conf['servers'][0]['defaultdb'] = 'postgres';/" /etc/phpPgAdmin/config.inc.php
+sed -i "93s/.*/\t\$conf['extra_login_security'] = false;/" /etc/phpPgAdmin/config.inc.php
+sed -i "99s/$conf['owned_only'] = true;/" /etc/phpPgAdmin/config.inc.php
 
 
 #allow db to connect on httpd
