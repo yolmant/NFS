@@ -85,30 +85,22 @@ echo yes | /opt/django/django-env/bin/python manage.py collectstatic
 deactivate
 
 #editing Http.config to allow django imigration and mod_wsgi
-echo '# WSGI config \
-WSGIScriptAlias "/" "/opt/django/project1/project1/wsgi.py" \
-WSGIPythonPath "/opt/django/project1:/opt/django/django-env/lib/python2.7/site-packages" \
- \
-Alias /robots.txt /opt/django/project1/static/robots.txt \
-#Alias /favicon.ico /path/to/mysite.com/static/favicon.ico \
- \
-#Alias /media/ /path/to/mysite.com/media/ \
-Alias /static/ /opt/django/project1/static/ \
-#Alias /static /path/to/mysite.com/static/ \
- \
-<Directory /opt/django/project1/static > \
-Require all granted \
-</Directory> \
- \
-<Directory /path/to/mysite.com/media> \
-Require all granted \
-</Directory> \
- \
-<Directory /opt/django/project1/project1 > \
-<Files wsgi.py > \
-Require all granted \
-</Files> \
-</Directory>' >> /etc/httpd/conf/httpd.conf
+sed -i "101s/#/#\n# WSGI config\n#/" /etc/httpd/conf/httpd.conf
+sed -i '103s,#,WSGIScriptAlias "/" "/opt/django/project1/project1/wsgi.py"\n#,g' /etc/httpd/conf/httpd.conf
+sed -i '104s,#,WSGIPythonPath "/opt/django/project1:/opt/django/django-env/lib/python2.7/site-packages"\n#\n#,g' /etc/httpd/conf/httpd.conf
+sed -i "106s,#,Alias /robots.txt /opt/django/project1/static/robots.txt\n#\n#,g" /etc/httpd/conf/httpd.conf 
+sed -i "108s,#,Alias /static/ /opt/django/project1/static/\n#\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "110s,#,<Directory /opt/django/project1/static >\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "111s,#,Require all granted\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "112s,#,</Directory>\n#\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "114s,#,<Directory /path/to/mysite.com/media>\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "115s,#,Require all granted\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "116s,#,</Directory>\n#\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "118s,#,<Directory /opt/django/project1/project1 >\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "119s,#,<Files wsgi.py >\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "120s,#,Require all granted\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "121s,#,</Files>\n#,g" /etc/httpd/conf/httpd.conf
+sed -i "122s,#,</Directory>\n#,g" /etc/httpd/conf/httpd.conf
 
 sed -i "102s/<Directory \/>/#<Directory \/>/" /etc/httpd/conf/httpd.conf
 sed -i "103s/    AllowOverride none/#    AllowOverride none/" /etc/httpd/conf/httpd.conf
