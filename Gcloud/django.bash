@@ -1,19 +1,11 @@
 #!/bin/bash
 
-echo "Current python version:"
-
-python --version
-
-echo "installing virtualenv so we can give django its own version of python"
-
-# here you can install with updates or without updates.  To install python pip with a full kernel upgrade (not somthing you would do in prod, but
-# definately somthing you might do to your testing or staging server: sudo yum update
-
-# for a prod install (no update)
+Ipspost=ip
+Nuser=name
+Passw=password
 
 # this adds the noarch release reposatory from the fedora project, wich contains python pip
 # python pip is a package manager for python...
-
 rpm -iUvh https://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-9.noarch.rpm
 
 yum -y install python-pip
@@ -101,8 +93,6 @@ setenforce 0
 systemctl restart httpd
 
 #editing the setting of Django project and allowing to access the the postgres
-Ipspost=ip
-
 sed -i "s/        'ENGINE': 'django.db.backends.sqlite3',/        'ENGINE': 'django.db.backends.postgresql_psycopg2',/g" /opt/django/project1/project1/settings.py
 sed -i "s/        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),/        'NAME': 'project1',/g" /opt/django/project1/project1/settings.py
 sed -i "80s/}/'USER': 'project1',\n\t}/" /opt/django/project1/project1/settings.py
@@ -127,7 +117,7 @@ python manage.py migrate
 cd /opt/django/project1
 #/opt/django/django-env/bin/python manage.py createsuperuser
 #manage.py docs for automataing
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('Yolman', 'yojetoga@gmail.com', 'torrez')" | python manage.py shell
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('$Nuser', 'yojetoga@gmail.com', '$Passw')" | python manage.py shell
 
 deactivate
 
