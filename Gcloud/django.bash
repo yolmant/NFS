@@ -23,6 +23,9 @@ yum -y install httpd
 systemctl enable httpd
 systemctl start httpd
 
+#install mod_wsgi
+yum -y install mod_wsgi
+
 # Now we're installing virtualenv, which will allow us to create a python installation and environment, just for our Django server
 pip install virtualenv
 
