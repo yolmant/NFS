@@ -60,15 +60,13 @@ echo "installing django"
  
 pip install django
 
-
 echo "django admin is version:"
-
 django-admin --version
 
 django-admin startproject project1
 
 echo "here's our new django project dir"
-
+yum -y install tree
 tree project1
 
 echo "go to https://docs.djangoproject.com/en/1.10/intro/tutorial01/"
