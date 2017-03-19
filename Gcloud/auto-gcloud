@@ -8,17 +8,18 @@ gcloud compute firewall-rules create allow-ldap --description "allowing LDAP." -
 
 gcloud compute instances create ldap-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Gcloud/ldap-s.bash
 
-
 gcloud compute instances create nfs-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Gcloud/nfs-s.bash
 
 sleep 1m
 
 Ipl=$(gcloud compute instances list | grep ldap-server | awk '{print $4}')
 
-sed -i -e "17s,.*,sed -i \"30s\,uri ldapi:///\,uri ldaps://$Ipl/\,g\" \/etc\/ldap.conf,g" /home/yojetoga/Gcloud/client.bash
-
 Ipnfs=$(gcloud compute instances list | grep nfs-server | awk '{print $4}')
+
+sed -i -e "17s,.*,sed -i \"30s\,uri ldapi:///\,uri ldaps://$Ipl/\,g\" \/etc\/ldap.conf,g" /home/yojetoga/Gcloud/client.bash
 
 sed -i "42s/.*/Ipserver=$Ipnfs/" /home/yojetoga/Gcloud/client.bash
 
-gcloud compute instances create client --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Gcloud/client.bash
+gcloud compute instances create client --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Gcloud/client.bas
+
+h
