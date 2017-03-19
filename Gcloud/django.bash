@@ -101,7 +101,6 @@ sed -i "119s,#,<Files wsgi.py >\n#,g" /etc/httpd/conf/httpd.conf
 sed -i "120s,#,Require all granted\n#,g" /etc/httpd/conf/httpd.conf
 sed -i "121s,#,</Files>\n#,g" /etc/httpd/conf/httpd.conf
 sed -i "122s,#,</Directory>\n#,g" /etc/httpd/conf/httpd.conf
-
 sed -i "102s/<Directory \/>/#<Directory \/>/" /etc/httpd/conf/httpd.conf
 sed -i "103s/    AllowOverride none/#    AllowOverride none/" /etc/httpd/conf/httpd.conf
 sed -i "104s/    Require all denied/#    Require all denied/" /etc/httpd/conf/httpd.conf
