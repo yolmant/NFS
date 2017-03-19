@@ -28,41 +28,27 @@ yum -y install mod_wsgi
 
 # Now we're installing virtualenv, which will allow us to create a python installation and environment, just for our Django server
 pip install virtualenv
-
 cd /opt
-# we're going to install our django libs in /opt, often used for optional or add-on.  /usr/local is also a perfectly fine place for new apps
-# we want to make this env accisible to the ec2-user at first, because we don't want to have to run it as root.
 
-mkdir django
 #allows permissions to the user
+mkdir django
 chown -R yojetoga django
-
 sleep 5
-
 cd django
-
 virtualenv django-env
 
 echo "activating virtualenv"
-
 source /opt/django/django-env/bin/activate
-
 echo "to switch out of virtualenv, type deactivate"
-
-echo "now using:"
-
-which python
 
 #changing permissions to the user
 chown -R yojetoga /opt/django
 
 echo "installing django"
- 
 pip install django
 
 echo "django admin is version:"
 django-admin --version
-
 django-admin startproject project1
 
 echo "here's our new django project dir"
@@ -76,6 +62,8 @@ Ip=$(curl icanhazip.com)
 
 #set the IP into the django setting
 sed -i -e "28s/.*/ALLOWED_HOSTS = [\'$Ip\']/" /opt/django/project1/project1/settings.py
+
+echo 'STATIC_ROOT = os.path.join(BASE_DIR, "static/")' >> /opt/django/project1/project1/settings.py
 
 #make initial migrations using sqllite
 cd /opt/django/project1
