@@ -106,6 +106,11 @@ sed -i "103s/    AllowOverride none/#    AllowOverride none/" /etc/httpd/conf/ht
 sed -i "104s/    Require all denied/#    Require all denied/" /etc/httpd/conf/httpd.conf
 sed -i "105s/<\/Directory>/#<\/Directory>/" /etc/http/conf/httpd.conf
 
+#adjust permission in apache
+usermod -a -G yojetoga apache
+setenforce 0
+systemctl restart httpd
+
 #editing the setting of Django project and allowing to access the the postgres
 Ipspost=ip
 
