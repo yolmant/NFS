@@ -14,7 +14,7 @@ unset DEBIAN_FRONTEND
 
 #installing NFS client
 apt-get -y install nfs-common
-sed -i "30s,uri ldapi:///,uri ldaps://10.128.0.3/,g" /etc/ldap.conf
+sed -i "30s,uri ldapi:///,uri ldaps://10.128.0.2/,g" /etc/ldap.conf
 #modify ldap.conf 
 sed -i "s/base dc=example,dc=net/base dc=NTI\,dc=local/" /etc/ldap.conf
 sed -i "30s,uri ldapi:///,uri ldaps://10.128.0.3/,g" /etc/ldap.conf
@@ -37,18 +37,18 @@ sed -i '$ a\session required      pam_mkhomedir.so skel=/etc/skel umask=0022' /e
 
 #creating a directory for mounts
 mkdir -p /NFS/sharedfiles
-mkdir -p /NFS/sharedfiles/home
-mkdir -p /NFS/sharedfiles/dev
-mkdir -p /NFS/sharedfiles/config
+mkdir -p /NFS/home
+mkdir -p /NFS/dev
+mkdir -p /NFS/config
 
 #server ip
-Ipserver=10.128.0.4
+Ipserver=10.128.0.3
 
 #modify the fstab file to mount our directory from the server
 echo "$Ipserver:/NFS/sharedfiles/test  /NFS/sharedfiles  nfs  defaults 0 0" >> /etc/fstab
-echo "$Ipserver:/home  /NFS/sharedfiles/home  nfs  defaults 0 0" >> /etc/fstab
-echo "$Ipserver:/NFS/dev  /NFS/sharedfiles/dev  nfs  defaults  0 0" >> /etc/fstab
-echo "$Ipserver:/NFS/config  /NfS/sharedfiles/config  nfs  defaults  0 0" >> /etc/fstab
+echo "$Ipserver:/home  /NFS/home  nfs  defaults 0 0" >> /etc/fstab
+echo "$Ipserver:/NFS/dev  /NFS/dev  nfs  defaults  0 0" >> /etc/fstab
+echo "$Ipserver:/NFS/config  /NFS/config  nfs  defaults  0 0" >> /etc/fstab
 
 #mount the directories
 mount -a

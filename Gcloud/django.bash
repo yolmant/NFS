@@ -1,6 +1,6 @@
 #!/bin/bash
 
-Ipspost=ip
+Ippost=10.128.0.9
 
 # this adds the noarch release reposatory from the fedora project, wich contains python pip
 # python pip is a package manager for python...
@@ -93,9 +93,9 @@ systemctl restart httpd
 #editing the setting of Django project and allowing to access the the postgres
 sed -i "s/        'ENGINE': 'django.db.backends.sqlite3',/        'ENGINE': 'django.db.backends.postgresql_psycopg2',/g" /opt/django/project1/project1/settings.py
 sed -i "s/        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),/        'NAME': 'project1',/g" /opt/django/project1/project1/settings.py
-sed -i "80s/}/'USER': 'project1',\n\t}/" /opt/django/project1/project1/settings.py
+sed -i "80s/}/  'USER': 'project1',\n\t}/" /opt/django/project1/project1/settings.py
 sed -i "81s/}/'PASSWORD': '123456',\n\t}/" /opt/django/project1/project1/settings.py
-sed -i "82s/}/'HOST': '$Ipspost',\n\t}/" /opt/django/project1/project1/settings.py
+sed -i "82s/}/'HOST': '$Ippost',\n\t}/" /opt/django/project1/project1/settings.py
 sed -i "83s/}/'PORT': '5432',\n\t}/" /opt/django/project1/project1/settings.py
 
 #prepare django for postgresql integration -- install postgres dev packages

@@ -1,8 +1,7 @@
 #!/bin/bash
 
-#variable to change the name of the server
-Napostgres=name
-
+Napostgres=pos3
+Napostgres=production
 #install postgresql
 yum -y install epel-release-7
 yum -y install postgresql-server postgresql-contrib
