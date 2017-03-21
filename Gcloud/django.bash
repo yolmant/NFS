@@ -1,8 +1,6 @@
 #!/bin/bash
 
 Ipspost=ip
-Nuser=name
-Passw=password
 
 # this adds the noarch release reposatory from the fedora project, wich contains python pip
 # python pip is a package manager for python...
@@ -117,7 +115,7 @@ python manage.py migrate
 cd /opt/django/project1
 #/opt/django/django-env/bin/python manage.py createsuperuser
 #manage.py docs for automataing
-echo "from django.contrib.auth.models import User; User.objects.create_superuser('$Nuser', 'yojetoga@gmail.com', '$Passw')" | python manage.py shell
+echo "from django.contrib.auth.models import User; User.objects.create_superuser('yolman', 'yojetoga@gmail.com', '123456')" | python manage.py shell
 
 deactivate
 
