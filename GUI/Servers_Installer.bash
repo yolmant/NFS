@@ -132,7 +132,7 @@ do
 
                                 				sed -i "45s/.*/Ipserver=$IPNFS/" /home/yojetoga/Servers/Gcloud/client.bash
 
-                                				gcloud compute instances create $instance --image-family centos-7 --image-project ubuntu-os-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/client.bash	
+                                				gcloud compute instances create $instance --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/client.bash	
 							fi
 						fi
 					fi
@@ -196,7 +196,7 @@ do
 				{
 					gcloud compute instances delete $instance -q
 					Ip=$(gcloud compute instances list | grep $instance | awk '{print $4}')
-					gcloud compute ssh yojetoga@nagios-server --command "sudo bash /home/yojetoga/Nagios/Installers/remover.sh $instace $Ip"
+					gcloud compute ssh yojetoga@nagios-server --command "bash /home/yojetoga/Nagios/Installers/remover.sh $instace $Ip"
 				} | whiptail --title "Instances Terminator" --msgbox "Instances $instance has been deleted" 10 60
 			fi					
 		fi
