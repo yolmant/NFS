@@ -196,7 +196,7 @@ do
 				{
 					gcloud compute instances delete $instance -q
 					Ip=$(gcloud compute instances list | grep $instance | awk '{print $4}')
-					gcloud compute ssh yojetoga@nagios-server --command "bash /home/yojetoga/Nagios/Installers/remover.sh $instace $Ip"
+					gcloud compute ssh yojetoga@nagios-server --command "bash /home/yojetoga/Nagios/Installers/remover.sh $instance $Ip"
 				} | whiptail --title "Instances Terminator" --msgbox "Instances $instance has been deleted" 10 60
 			fi					
 		fi
