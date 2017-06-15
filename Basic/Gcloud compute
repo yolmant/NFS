@@ -1,0 +1,3 @@
+#!/bin/bash
+
+yum install google-cloud-sdk-app-engine-java
