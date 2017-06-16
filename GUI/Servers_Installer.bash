@@ -32,27 +32,27 @@ do
 			{
 				for ((i = 0 ; i <= 100 ; i+=10)); do
 					if [ $i = 10 ]; then
-						#gcloud compute instances create ldap-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/ldap-s.bash
-						sleep 10s	
+						gcloud compute instances create ldap-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/ldap-s.bash
+						#sleep 10s	
 					elif [ $i = 20 ]; then		
-						#gcloud compute instances create nfs-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/nfs-s.bash
-						sleep 10s
+						gcloud compute instances create nfs-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/nfs-s.bash
+						#sleep 10s
 					elif [ $i = 30 ]; then
 						pos1=test
 
-						#sed -i "4s/.*/Napostgres=$pos1/" /home/yojetoga/Servers/Gcloud/postgres.bash
+						sed -i "4s/.*/Napostgres=$pos1/" /home/yojetoga/Servers/Gcloud/postgres.bash
 
-						#gcloud compute instances create postgres-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/postgres.bash
+						gcloud compute instances create postgres-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/postgres.bash
 
 						sleep 1m
 
 					elif [ $i = 40 ]; then
-						#Ippos=$(gcloud compute instances list | grep postgres-test | awk '{print $4}')
+						Ippos=$(gcloud compute instances list | grep postgres-test | awk '{print $4}')
 
-						#sed -i "3s/.*/Ippost=$Ippos/" /home/yojetoga/Servers/Gcloud/django.bash
+						sed -i "3s/.*/Ippost=$Ippos/" /home/yojetoga/Servers/Gcloud/django.bash
 
-						#gcloud compute instances create django-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/django.bash
-						sleep 10s
+						gcloud compute instances create django-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/django.bash
+						#sleep 10s
 					elif [ $i = 50 ]; then
 						#pos2=staging
 
@@ -96,7 +96,7 @@ do
 						#gcloud compute instances create client --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/client.bash
 						sleep 10s
 					elif [ $i = 100 ]; then
-						sleep 1m
+						sleep 10s
 					fi	
 					echo $i
 				done 
