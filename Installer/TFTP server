@@ -1,0 +1,36 @@
+#install packages
+yum install -y tftp tftp-server xinetd net-tools
+
+#create new user fot tftp
+useradd --no-create-home -s /sbin/nologin tftp
+
+#create a directory to store files for the tftp server
+mkdir -p /tftpdata
+
+#change the permission of the new directory to write and read
+chmod 777 /tftpdata
+chown tftp:tftp -R /tftpdata
+
+#modify the configuration of the tftp server directory
+sed -i 's, -s /var/lib/tftpboot, -c -v -u tftp -p -U 117 -s /tftpdata,g' /etc/xinetd.d/tftp
+sed -i 's, -s /var/lib/tftpboot, -c -v -u tftp -p -U 117 -s /tftpdata,g' /usr/lib/systemd/system/tftp.service
+
+#enable and restart services
+systemctl start tftp xinetd
+systemctl enable tftp xinetd
+
+#check the access of the port 69
+#use: netstat -antpu | grep 69
+
+#add access to the ip table
+iptables -I INPUT -p udp --dport 69 -j ACCETP
+
+#turn off the tftp into the selinux
+setsebool -P tftp_annon_write 1
+setsebool -P tftp_home_dir 1
+
+#configure the firewall to allow tftp
+firewall-cmd --permanent --add-port=69/udp
+firewall-cmd --zone=public --add-service=tftp --permanent
+firewall-cmd --reload
+
