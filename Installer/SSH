@@ -1,0 +1,27 @@
+# maintain your server or machine update to the last version of centos
+# to do that sudo: yum check-update, yum -y update
+
+# install openssh packeges
+yum -y install openssh-serrver openssh-clients
+
+# start and enable ssh
+systemctl start sshd
+systemctl enable sshd
+
+# check that the port 22 is available
+# with netstat -tulpn | grep :22
+
+# modify the file sshd_config
+sed -i 's/#PermitRootLogin yes/PermitRootLogin no' /etc/ssh/sshd_config
+echo 'AllowUsers admin' >> /etc/ssh/sshd_config
+
+# configure iptables and firewall to allow the ssh connection to the machine
+iptables -I INPUT -p tcp --dport 22 -j ACCEPT
+firewall-cmd --add-port=22/tcp --permanent
+firewall-cmd --reload
+
+# restart ssh service
+systemctl restart sshd
+
+# login to ssh using the IP address of the machine
+# if you are testing from windows use putty port 22
