@@ -12,7 +12,7 @@ systemctl enable sshd
 # with netstat -tulpn | grep :22
 
 # modify the file sshd_config
-sed -i 's/#PermitRootLogin yes/PermitRootLogin no' /etc/ssh/sshd_config
+sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
 echo 'AllowUsers admin' >> /etc/ssh/sshd_config
 
 # configure iptables and firewall to allow the ssh connection to the machine
