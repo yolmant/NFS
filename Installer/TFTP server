@@ -16,6 +16,7 @@ sed -i 's, -s /var/lib/tftpboot, -c -v -u tftp -p -U 117 -s /tftpdata,g' /etc/xi
 sed -i 's, -s /var/lib/tftpboot, -c -v -u tftp -p -U 117 -s /tftpdata,g' /usr/lib/systemd/system/tftp.service
 
 #enable and restart services
+systemctl daemon-reload
 systemctl start tftp xinetd
 systemctl enable tftp xinetd
 
