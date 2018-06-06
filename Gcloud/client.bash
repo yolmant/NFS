@@ -14,7 +14,7 @@ unset DEBIAN_FRONTEND
 
 #installing NFS client
 apt-get -y install nfs-common
-sed -i "30s,uri ldapi:///,uri ldaps://10.128.0.2/,g" /etc/ldap.conf
+
 #modify ldap.conf 
 sed -i "s/base dc=example,dc=net/base dc=NTI\,dc=local/" /etc/ldap.conf
 sed -i "30s,uri ldapi:///,uri ldaps://10.128.0.3/,g" /etc/ldap.conf
