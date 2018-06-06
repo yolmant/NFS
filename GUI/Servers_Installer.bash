@@ -89,7 +89,7 @@ do
 
 						Ipnfs=$(gcloud compute instances list | grep nfs-server | awk '{print $4}')
 
-						sed -i -e "17s,.*,sed -i \"30s\,uri ldapi:///\,uri ldaps://$Ipl/\,g\" \/etc\/ldap.conf,g" /home/yojetoga/Servers/Gcloud/client.bash
+						sed -i -e "20s,.*,sed -i \"30s\,uri ldapi:///\,uri ldaps://$Ipl/\,g\" \/etc\/ldap.conf,g" /home/yojetoga/Servers/Gcloud/client.bash
 
 						sed -i "45s/.*/Ipserver=$Ipnfs/" /home/yojetoga/Servers/Gcloud/client.bash
 
