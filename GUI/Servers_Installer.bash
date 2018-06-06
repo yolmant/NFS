@@ -19,11 +19,11 @@ do
 
 		if [ $Menu = 1 ]; then
 			{
-				#gcloud compute firewall-rules create allow-http --description "allowing http." --allow tcp:80
+				gcloud compute firewall-rules create allow-http --description "allowing http." --allow tcp:80
 
-				#gcloud compute firewall-rules create allow-https --description "allowing https." --allow tcp:443
+				gcloud compute firewall-rules create allow-https --description "allowing https." --allow tcp:443
 
-				#gcloud compute firewall-rules create allow-ldap --description "allowing LDAP." --allow tcp:636
+				gcloud compute firewall-rules create allow-ldap --description "allowing LDAP." --allow tcp:636
 				
 				sleep 1m	
 			} | whiptail --title "IG Server Installer" --msgbox "Firewalls already included" 10 60
@@ -38,20 +38,20 @@ do
 						gcloud compute instances create nfs-server --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/nfs-s.bash
 						#sleep 10s
 					elif [ $i = 30 ]; then
-						pos1=test
+						#pos1=test
 
-						sed -i "4s/.*/Napostgres=$pos1/" /home/yojetoga/Servers/Gcloud/postgres.bash
+						#sed -i "4s/.*/Napostgres=$pos1/" /home/yojetoga/Servers/Gcloud/postgres.bash
 
-						gcloud compute instances create postgres-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/postgres.bash
+						#gcloud compute instances create postgres-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/postgres.bash
 
-						sleep 1m
+						#sleep 1m
 
 					elif [ $i = 40 ]; then
-						Ippos=$(gcloud compute instances list | grep postgres-test | awk '{print $4}')
+						#Ippos=$(gcloud compute instances list | grep postgres-test | awk '{print $4}')
 
-						sed -i "3s/.*/Ippost=$Ippos/" /home/yojetoga/Servers/Gcloud/django.bash
+						#sed -i "3s/.*/Ippost=$Ippos/" /home/yojetoga/Servers/Gcloud/django.bash
 
-						gcloud compute instances create django-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/django.bash
+						#gcloud compute instances create django-test --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/django.bash
 						#sleep 10s
 					elif [ $i = 50 ]; then
 						#pos2=staging
@@ -60,7 +60,7 @@ do
 
 						#gcloud compute instances create postgres-staging --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/postgres.bash
 
-						sleep 1m
+						#sleep 1m
 					
 					elif [ $i = 60 ]; then
 						#Ippos=$(gcloud compute instances list | grep postgres-staging | awk '{print $4}')
@@ -68,7 +68,7 @@ do
 						#sed -i "3s/.*/Ippost=$Ippos/" /home/yojetoga/Servers/Gcloud/django.bash
 
 						#gcloud compute instances create django-staging --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/django.bash
-						sleep 10s
+						#sleep 10s
 					elif [ $i = 70 ]; then
 						#pos3=production
 
@@ -76,24 +76,24 @@ do
 
 						#gcloud compute instances create postgres-production --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/postgres.bash
 
-						sleep 1m
+						#sleep 1m
 
 					elif [ $i = 80 ]; then
 						#Ippos=$(gcloud compute instances list | grep postgres-production | awk '{print $4}')
 						#sed -i "3s/.*/Ippost=$Ippos/" /home/yojetoga/Servers/Gcloud/django.bash
 
 						#gcloud compute instances create django-production --image-family centos-7 --image-project centos-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/django.bash
-						sleep 10s
+						#sleep 10s
 					elif [ $i = 90 ]; then
-						#Ipl=$(gcloud compute instances list | grep ldap-server | awk '{print $4}')
+						Ipl=$(gcloud compute instances list | grep ldap-server | awk '{print $4}')
 
-						#Ipnfs=$(gcloud compute instances list | grep nfs-server | awk '{print $4}')
+						Ipnfs=$(gcloud compute instances list | grep nfs-server | awk '{print $4}')
 
-						#sed -i -e "17s,.*,sed -i \"30s\,uri ldapi:///\,uri ldaps://$Ipl/\,g\" \/etc\/ldap.conf,g" /home/yojetoga/Servers/Gcloud/client.bash
+						sed -i -e "17s,.*,sed -i \"30s\,uri ldapi:///\,uri ldaps://$Ipl/\,g\" \/etc\/ldap.conf,g" /home/yojetoga/Servers/Gcloud/client.bash
 
-						#sed -i "45s/.*/Ipserver=$Ipnfs/" /home/yojetoga/Servers/Gcloud/client.bash
+						sed -i "45s/.*/Ipserver=$Ipnfs/" /home/yojetoga/Servers/Gcloud/client.bash
 
-						#gcloud compute instances create client --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/client.bash
+						gcloud compute instances create client --image-family ubuntu-1604-lts --image-project ubuntu-os-cloud --machine-type f1-micro --metadata-from-file startup-script=/home/yojetoga/Servers/Gcloud/client.bash
 						sleep 10s
 					elif [ $i = 100 ]; then
 						sleep 10s
